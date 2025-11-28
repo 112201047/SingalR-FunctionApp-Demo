@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36705.20 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRFunctionApp", "SignalRFunctionApp\SignalRFunctionApp.csproj", "{AFA3AE69-B3E1-4FDD-A2E7-EECCAD57A13E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRFunctionApp.Tests", "SignalRFunctionApp.Tests\SignalRFunctionApp.Tests.csproj", "{6695C7BB-116C-4F71-9311-F80C65C63F28}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFA3AE69-B3E1-4FDD-A2E7-EECCAD57A13E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFA3AE69-B3E1-4FDD-A2E7-EECCAD57A13E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFA3AE69-B3E1-4FDD-A2E7-EECCAD57A13E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFA3AE69-B3E1-4FDD-A2E7-EECCAD57A13E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6695C7BB-116C-4F71-9311-F80C65C63F28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6695C7BB-116C-4F71-9311-F80C65C63F28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6695C7BB-116C-4F71-9311-F80C65C63F28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6695C7BB-116C-4F71-9311-F80C65C63F28}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {91F2C6D9-ADB1-4F26-AB3B-D2E652F8EA20}
+	EndGlobalSection
+EndGlobal
