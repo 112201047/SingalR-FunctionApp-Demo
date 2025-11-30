@@ -1,4 +1,4 @@
-/******************************************************************************
+﻿/******************************************************************************
 * Filename    = MessageSignalR.cs
 * Author      = Nikhil S Thomas
 * Product     = Comm-Uni-Cator
@@ -61,29 +61,27 @@ public class MessageSignalR
         // Extract meeting id and message from query parameters
         NameValueCollection query = req.Query;
         string? meetingId = query["meetingId"];
+        string? userId = query["userId"];
         string? rawMessage = query["message"];
         string message = string.IsNullOrEmpty(rawMessage) ? "New Doubt Raised!" : rawMessage!;
 
         // Create SignalR message action to broadcast the message
         var signalRMessage = new SignalRMessageAction(
             target: "ReceiveDoubt",
-            arguments: new object[] { message }
-        )
-        {
+            arguments: new object[] { userId, message }
+        ) {
             GroupName = meetingId
         };
 
         // Create HTTP response acknowledging the send operation
         HttpResponseData response = req.CreateResponse(HttpStatusCode.OK);
-        await response.WriteAsJsonAsync(new
-        {
+        await response.WriteAsJsonAsync(new {
             status = "ok",
             message = $"Message sent to SignalR hub. Broadcasted: {message}"
         });
 
         // Return both SignalR message action and HTTP response
-        return new MessageResponse
-        {
+        return new MessageResponse {
             SignalRMessage = signalRMessage,
             HttpResponse = response
         };

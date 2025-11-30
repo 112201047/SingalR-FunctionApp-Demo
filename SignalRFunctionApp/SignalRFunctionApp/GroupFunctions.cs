@@ -1,4 +1,4 @@
-/******************************************************************************
+﻿/******************************************************************************
 * Filename    = GroupFunctions.cs
 * Author      = Nikhil S Thomas
 * Product     = Comm-Uni-Cator
@@ -10,6 +10,7 @@ using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.Functions.Worker.SignalRService;
 using Microsoft.Extensions.Logging;
+using System.Collections.Specialized;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -93,14 +94,14 @@ public class GroupFunctions
         [HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequestData req)
     {
         // Extract meeting id and user id
-        var query = req.Query;
+        NameValueCollection query = req.Query;
 
         string? meetingId = query["meetingId"];
         string? userId = query["userId"];
 
         if (string.IsNullOrEmpty(meetingId) || string.IsNullOrEmpty(userId))
         {
-            var bad = req.CreateResponse(HttpStatusCode.BadRequest);
+            HttpResponseData bad = req.CreateResponse(HttpStatusCode.BadRequest);
             await bad.WriteStringAsync("meetingId and userId are required.");
             return new GroupResponse { HttpResponse = bad };
         }
@@ -108,13 +109,12 @@ public class GroupFunctions
         _logger.LogInformation($"User {userId} leaving group {meetingId}");
 
         // Create the SignalR group remove action
-        var action = new SignalRGroupAction(SignalRGroupActionType.Remove)
-        {
+        var action = new SignalRGroupAction(SignalRGroupActionType.Remove) {
             GroupName = meetingId,
             UserId = userId
         };
 
-        var ok = req.CreateResponse(HttpStatusCode.OK);
+        HttpResponseData ok = req.CreateResponse(HttpStatusCode.OK);
         await ok.WriteStringAsync($"User {userId} left group {meetingId}.");
 
         return new GroupResponse { GroupAction = action, HttpResponse = ok };

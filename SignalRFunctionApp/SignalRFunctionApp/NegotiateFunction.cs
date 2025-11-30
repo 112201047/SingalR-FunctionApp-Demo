@@ -1,4 +1,4 @@
-/******************************************************************************
+﻿/******************************************************************************
 * Filename    = NegotiateFunction.cs
 * Author      = Nikhil S Thomas
 * Product     = Comm-Uni-Cator
@@ -46,7 +46,7 @@ public class NegotiateFunction
     {
         _logger.LogInformation("Negotiation request received.");
 
-        var response = req.CreateResponse(HttpStatusCode.OK);
+        HttpResponseData response = req.CreateResponse(HttpStatusCode.OK);
         await response.WriteAsJsonAsync(connectionInfo);
 
         return response;

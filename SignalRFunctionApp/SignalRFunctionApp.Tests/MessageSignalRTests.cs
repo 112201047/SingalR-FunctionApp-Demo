@@ -68,7 +68,8 @@ public class MessageSignalRTests
     {
         var query = new NameValueCollection {
             { "message", "Test Doubt" },
-            { "meetingId", "Test123" }
+            { "meetingId", "Test123" },
+            { "userId", "TestUser" }
         };
         _mockRequest.Setup(r => r.Query).Returns(query);
 
@@ -76,8 +77,10 @@ public class MessageSignalRTests
 
         Assert.NotNull(result.SignalRMessage);
         Assert.Equal("ReceiveDoubt", result.SignalRMessage.Target);
-        Assert.Single(result.SignalRMessage.Arguments);
-        Assert.Equal("Test Doubt", result.SignalRMessage.Arguments[0]);
+
+        Assert.Equal(2, result.SignalRMessage.Arguments.Length);
+        Assert.Equal("TestUser", result.SignalRMessage.Arguments[0]);
+        Assert.Equal("Test Doubt", result.SignalRMessage.Arguments[1]);
         Assert.Equal("Test123", result.SignalRMessage.GroupName);
 
         Assert.NotNull(result.HttpResponse);
@@ -108,7 +111,8 @@ public class MessageSignalRTests
     public async Task BroadcastDefaultMessageTest()
     {
         var query = new NameValueCollection {
-            { "meetingId", "Test123" }
+            { "meetingId", "Test123" },
+            { "userId", "TestUser" }
         };
         _mockRequest.Setup(r => r.Query).Returns(query);
 
@@ -116,8 +120,10 @@ public class MessageSignalRTests
 
         Assert.NotNull(result.SignalRMessage);
         Assert.Equal("ReceiveDoubt", result.SignalRMessage.Target);
-        Assert.Single(result.SignalRMessage.Arguments);
-        Assert.Equal("New Doubt Raised!", result.SignalRMessage.Arguments[0]);
+
+        Assert.Equal(2, result.SignalRMessage.Arguments.Length);
+        Assert.Equal("TestUser", result.SignalRMessage.Arguments[0]);
+        Assert.Equal("New Doubt Raised!", result.SignalRMessage.Arguments[1]);
         Assert.Equal("Test123", result.SignalRMessage.GroupName);
 
         Assert.NotNull(result.HttpResponse);
