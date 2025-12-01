@@ -1,7 +1,7 @@
 ﻿/******************************************************************************
 * Filename    = GroupFunctions.cs
 * Author      = Nikhil S Thomas
-* Product     = Comm-Uni-Cator
+* Product     = SignalR Demo
 * Project     = SignalR Function App
 * Description = Azure Functions to manage SignalR group membership.
 *****************************************************************************/
@@ -57,14 +57,14 @@ public class GroupFunctions
         [HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequestData req)
     {
         // Extract meeting id and user id
-        var query = req.Query;
+        NameValueCollection query = req.Query;
 
         string? meetingId = query["meetingId"];
         string? userId = query["userId"];
 
         if (string.IsNullOrEmpty(meetingId) || string.IsNullOrEmpty(userId))
         {
-            var bad = req.CreateResponse(HttpStatusCode.BadRequest);
+            HttpResponseData bad = req.CreateResponse(HttpStatusCode.BadRequest);
             await bad.WriteStringAsync("meetingId and userId are required.");
             return new GroupResponse { HttpResponse = bad };
         }
@@ -72,13 +72,12 @@ public class GroupFunctions
         _logger.LogInformation($"User {userId} joining group {meetingId}");
 
         // Create the SignalR group add action
-        var action = new SignalRGroupAction(SignalRGroupActionType.Add)
-        {
+        var action = new SignalRGroupAction(SignalRGroupActionType.Add) {
             GroupName = meetingId,
             UserId = userId
         };
 
-        var ok = req.CreateResponse(HttpStatusCode.OK);
+        HttpResponseData ok = req.CreateResponse(HttpStatusCode.OK);
         await ok.WriteStringAsync($"User {userId} joined group {meetingId}.");
 
         return new GroupResponse { GroupAction = action, HttpResponse = ok };

@@ -1,7 +1,7 @@
 ﻿/******************************************************************************
 * Filename    = MessageSignalRTests.cs
 * Author      = Nikhil S Thomas
-* Product     = Comm-Uni-Cator
+* Product     = SignalR Demo
 * Project     = SignalR Function App
 * Description = Unit tests for MessageSignalR Azure Function.
 *****************************************************************************/

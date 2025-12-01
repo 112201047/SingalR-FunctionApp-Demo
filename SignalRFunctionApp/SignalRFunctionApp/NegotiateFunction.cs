@@ -1,7 +1,7 @@
 ﻿/******************************************************************************
 * Filename    = NegotiateFunction.cs
 * Author      = Nikhil S Thomas
-* Product     = Comm-Uni-Cator
+* Product     = SignalR Demo
 * Project     = SignalR Function App
 * Description = Azure Function to handle SignalR negotiation requests.
 *****************************************************************************/
